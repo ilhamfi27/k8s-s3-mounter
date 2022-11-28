@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: s3fuse
-        image: dockerhub.io/meain/s3-mounter
+        image: dockerhub.io/ilhamfadhilah/s3-mounter
         securityContext:
           privileged: true
         envFrom:

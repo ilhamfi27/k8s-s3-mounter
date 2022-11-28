@@ -2,10 +2,10 @@ FROM alpine:3.3
 
 ENV MNT_POINT /var/s3fs
 
-ARG S3FS_VERSION=v1.86
+ARG S3FS_VERSION=v1.91
 
 RUN apk --update --no-cache add fuse alpine-sdk automake autoconf libxml2-dev fuse-dev curl-dev git bash; \
-    git clone https://github.com/s3fs-fuse/s3fs-fuse.git; \
+    git clone https://github.com/ilhamfi27/s3fs-fuse.git; \
     cd s3fs-fuse; \
     git checkout tags/${S3FS_VERSION}; \
     ./autogen.sh; \
