@@ -4,14 +4,14 @@ metadata:
   name: test-pd
 spec:
   containers:
-  - image: nginx
-    name: s3-test-container
-    securityContext:
-      privileged: true
-    volumeMounts:
-    - name: mntdatas3fs
-      mountPath: /var/s3fs:shared
+    - image: nginx
+      name: s3-test-container
+      securityContext:
+        privileged: true
+      volumeMounts:
+        - name: mntdatas3fs
+          mountPath: /var/s3fs:shared
   volumes:
-  - name: mntdatas3fs
-    hostPath:
-      path: /mnt/s3data/data
+    - name: mntdatas3fs
+      hostPath:
+        path: /mnt/s3data/data

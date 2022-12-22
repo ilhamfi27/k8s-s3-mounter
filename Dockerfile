@@ -1,22 +1,18 @@
-FROM alpine:3.3
+FROM ubuntu:20.04
 
-ENV MNT_POINT /var/s3fs
+ENV S3_MOUNT_POINT /var/s3fs
 
 ARG S3FS_VERSION=v1.91
 
-RUN apk --update --no-cache add fuse alpine-sdk automake autoconf libxml2-dev fuse-dev curl-dev git bash; \
-    git clone https://github.com/ilhamfi27/s3fs-fuse.git; \
-    cd s3fs-fuse; \
-    git checkout tags/${S3FS_VERSION}; \
-    ./autogen.sh; \
-    ./configure --prefix=/usr; \
-    make; \
-    make install; \
-    make clean; \
-    rm -rf /var/cache/apk/*; \
-    apk del git automake autoconf;
+RUN apt update
+RUN apt install -y s3fs bash curl
 
-RUN mkdir -p "$MNT_POINT"
-
+COPY entrypoint.sh entrypoint.sh
 COPY run.sh run.sh
+
+RUN chmod +x entrypoint.sh
+RUN chmod +x run.sh
+
 CMD ./run.sh
+
+ENTRYPOINT [ "./entrypoint.sh" ]
